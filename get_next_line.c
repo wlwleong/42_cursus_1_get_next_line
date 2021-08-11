@@ -6,7 +6,7 @@
 /*   By: wlow <wlow@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:03 by wlow              #+#    #+#             */
-/*   Updated: 2021/08/11 16:50:10 by wlow             ###   ########.fr       */
+/*   Updated: 2021/08/11 20:59:12 by wlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*get_next_line(int fd)
 			ret_string = ft_strdup(buffer_to_read);
 		else
 			ret_string = ft_strjoin(ret_string, buffer_to_read);
-		ft_bzero(buffer_to_read, BUFFER_SIZE);
 		read_size = read(fd, buffer_to_read, BUFFER_SIZE);
 	}
 	return (ret_string);
