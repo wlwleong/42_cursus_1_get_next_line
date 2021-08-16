@@ -6,7 +6,7 @@
 /*   By: wlow <wlow@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:08 by wlow              #+#    #+#             */
-/*   Updated: 2021/08/11 20:57:49 by wlow             ###   ########.fr       */
+/*   Updated: 2021/08/16 20:26:37 by wlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,16 @@
 # include <sys/stat.h>*/
 
 char	*get_next_line(int fd);
-char	*ft_strdup(const char *string);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	ft_bzero(void *string, size_t n);
+void	*ft_memmove(void *dest, const void *src, size_t count);
+
+typedef struct s_struct
+{
+	char	read_string[BUFFER_SIZE];
+	ssize_t	n_read;
+	size_t	read_i;
+	size_t	start;
+	int		end_of_line;
+	int		end_of_file;
+}			t_struct;
 
 #endif
