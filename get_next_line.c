@@ -6,7 +6,7 @@
 /*   By: wlow <wlow@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:03 by wlow              #+#    #+#             */
-/*   Updated: 2021/08/16 21:16:24 by wlow             ###   ########.fr       */
+/*   Updated: 2021/08/16 22:41:39 by wlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,9 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (tab.end_of_line == 0)
 	{
-		if (tab.end_of_file < 0)
-			return (NULL);
 		tab.n_read = read(fd, tab.read_string, BUFFER_SIZE);
 		if (tab.n_read == 0)
 			return (NULL);
-		if (tab.n_read < BUFFER_SIZE)
-			tab.end_of_file = -1;
 		tab.read_i = -1;
 	}
 	tab.start = ++tab.read_i;
@@ -48,7 +44,11 @@ int	get_newline(char *str, size_t *index, size_t str_len)
 	while (*index < str_len)
 	{
 		if (str[*index] == '\n')
+		{
+			if ((*index + 1) == str_len)
+				return (0);
 			return (1);
+		}
 		*index += 1;
 	}
 	*index -= 1;
