@@ -6,7 +6,7 @@
 /*   By: wlow <wlow@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:08 by wlow              #+#    #+#             */
-/*   Updated: 2021/08/16 20:26:37 by wlow             ###   ########.fr       */
+/*   Updated: 2021/08/16 22:43:01 by wlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_struct
 	size_t	read_i;
 	size_t	start;
 	int		end_of_line;
-	int		end_of_file;
 }			t_struct;
 
 #endif
