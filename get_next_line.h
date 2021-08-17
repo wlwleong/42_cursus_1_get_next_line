@@ -6,7 +6,7 @@
 /*   By: wlow <wlow@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:08 by wlow              #+#    #+#             */
-/*   Updated: 2021/08/16 22:43:01 by wlow             ###   ########.fr       */
+/*   Updated: 2021/08/18 01:10:10 by wlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 char	*get_next_line(int fd);
 void	*ft_memmove(void *dest, const void *src, size_t count);
+char	*ft_strdup(const char *string);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 typedef struct s_struct
 {
@@ -28,7 +30,7 @@ typedef struct s_struct
 	ssize_t	n_read;
 	size_t	read_i;
 	size_t	start;
-	int		end_of_line;
+	int		new_line;
 }			t_struct;
 
 #endif
