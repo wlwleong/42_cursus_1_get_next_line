@@ -6,7 +6,7 @@
 /*   By: wlow <wlow@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:03 by wlow              #+#    #+#             */
-/*   Updated: 2021/08/18 07:48:32 by wlow             ###   ########.fr       */
+/*   Updated: 2021/08/18 12:40:33 by wlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void	ft_putstr_fd(char *s, int fd);
 char	*get_next_line(int fd);
-char 	c;
 
 int	main(int argc, char **argv)
 {
@@ -38,8 +37,8 @@ int	main(int argc, char **argv)
 	}
 	file_content = get_next_line(fd);
 	printf("%s", file_content);
-	c = 0;
-	printf("%ld\n", read(fd, &c, 1));
+	file_content = get_next_line(fd);
+	printf("%s", file_content);
 	file_content = get_next_line(fd);
 	printf("%s", file_content);
 	printf("\n");
