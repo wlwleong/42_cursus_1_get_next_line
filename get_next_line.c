@@ -6,55 +6,38 @@
 /*   By: wlow <wlow@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:03 by wlow              #+#    #+#             */
-/*   Updated: 2021/08/18 15:27:13 by wlow             ###   ########.fr       */
+/*   Updated: 2021/08/18 21:55:06 by wlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 int		get_newline(char *str, size_t *index, size_t str_len);
-void	save_line(char *ret_str, char *read_str);
+void	save_line(char **ret_str, size_t i_start, size_t i_end, void *ptr);
 
 char	*get_next_line(int fd)
 {
-	static t_struct	tab;
+	static t_struct	t;
 	char			*ret_string;
-	char			*temp;
-	char			*temp_another;
-	size_t			len;
 
 	if (read(fd, NULL, 0) < 0)
 		return (NULL);
-	if ((size_t)(tab.n_read) == tab.read_i)
+	if ((size_t)(t.n_read) == t.read_i)
 	{
-		tab.n_read = read(fd, tab.read_string, BUFFER_SIZE);
-		tab.read_i = 0;
+		t.n_read = read(fd, t.read_string, BUFFER_SIZE);
+		t.read_i = 0;
 	}
 	ret_string = NULL;
-	tab.new_line = 0;
-	while ((tab.n_read - tab.read_i) > 0 && tab.new_line == 0)
+	t.new_line = 0;
+	while ((t.n_read - t.read_i) > 0 && t.new_line == 0)
 	{
-		tab.start = tab.read_i;
-		tab.new_line = get_newline(tab.read_string, &tab.read_i, tab.n_read);
-		len = (tab.read_i - 1) - tab.start + 1;
-		temp = (char *) malloc (sizeof(*temp) * (len + 1));
-		ft_memmove(temp, &tab.read_string[tab.start], len);
-		temp[len] = '\0';
-		if (!ret_string)
-			ret_string = ft_strdup(temp);
-		else
+		t.start = t.read_i;
+		t.new_line = get_newline(t.read_string, &t.read_i, t.n_read);
+		save_line(&ret_string, t.start, t.read_i - 1, &t.read_string[t.start]);
+		if (t.read_i == (size_t)(t.n_read) && t.new_line == 0)
 		{
-			temp_another = ft_strdup(ret_string);
-			free(ret_string);
-			ret_string = ft_strjoin(temp_another, temp);
-			free(temp_another);
-		}
-		free(temp);
-		if (tab.read_i == (size_t)(tab.n_read) && tab.new_line == 0)
-		{
-			tab.n_read = read(fd, tab.read_string, BUFFER_SIZE);
-			tab.read_i = 0;
+			t.n_read = read(fd, t.read_string, BUFFER_SIZE);
+			t.read_i = 0;
 		}
 	}
 	return (ret_string);
@@ -74,17 +57,23 @@ int	get_newline(char *str, size_t *index, size_t str_len)
 	return (0);
 }
 
-void	save_line(char *ret_str, char *read_str)
+void	save_line(char **ret_str, size_t i_start, size_t i_end, void *ptr)
 {
+	char	*read_str;
 	char	*temp;
+	size_t	len;
 
-	if (!ret_str)
-		ret_str = ft_strdup(read_str);
+	len = (i_end - i_start) + 1;
+	read_str = (char *) malloc (sizeof(*read_str) * (len + 1));
+	ft_memmove(read_str, ptr, len);
+	read_str[len] = '\0';
+	if (!*ret_str)
+		*ret_str = ft_strdup(read_str);
 	else
 	{
-		temp = ft_strdup(ret_str);
-		free(ret_str);
-		ret_str = ft_strjoin(temp, read_str);
+		temp = ft_strdup(*ret_str);
+		free(*ret_str);
+		*ret_str = ft_strjoin(temp, read_str);
 		free(temp);
 	}
 	free(read_str);
