@@ -6,7 +6,7 @@
 /*   By: wlow <wlow@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:10:03 by wlow              #+#    #+#             */
-/*   Updated: 2021/08/18 21:55:06 by wlow             ###   ########.fr       */
+/*   Updated: 2021/08/18 22:02:49 by wlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,8 @@ int	get_newline(char *str, size_t *index, size_t str_len)
 {
 	while (*index < str_len)
 	{
-		if (str[*index] == '\n')
-		{
-			*index += 1;
+		if (str[(*index)++] == '\n')
 			return (1);
-		}
-		*index += 1;
 	}
 	return (0);
 }
