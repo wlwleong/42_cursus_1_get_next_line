@@ -15,6 +15,9 @@
 int		get_newline(char *str, size_t *index, size_t str_len);
 void	save_line(char **ret_str, size_t i_start, size_t i_end, void *ptr);
 
+/*
+** Main Function
+*/
 char	*get_next_line(int fd)
 {
 	static t_struct	t;
